@@ -1,0 +1,65 @@
+{% extends 'template.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+        <head>
+            <title>Add Staff</title>
+            <style>
+                /* Chrome, Safari, Edge, Opera */
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+                }
+
+                /* Firefox */
+                input[type=number] {
+                -moz-appearance: textfield;
+                }
+            </style>
+        </head>
+        <body>
+            <article>
+                <h2 style="margin-bottom: 0px;">Add Staff</h2>
+                <hr style="border: 2px solid #43a047;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="grid">
+                        <label>Full Name<input type="text" name="name" id=""></label>
+                        <label>Gender
+                            <select name="gender">
+                                <option value="none" disabled selected>Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="grid">
+                        <label>Age <input type="number" name="age" id="" max="60" min="18"></label>
+                        <label>Mobile no. <input type="number" name="mobile" id="" max="10" min='10'></label>
+                        <label for="">Role
+                            <select name="role">
+                                <option value="none" disabled selected>Select</option>
+                                <option value="Nurse">Nurse</option>
+                                <option value="Patient Service Assistant">Patient Service Assistant</option>
+                                <option value="Clinical Assistant">Clinical Assistant</option>
+                                <option value="Ward Clerk">Ward Clerk</option>
+                                <option value="Pharmacist">Pharmacist</option>
+                                <option value="Volunteer">Volunteer</option>
+                                <option value="Porters">Porters</option>
+                            </select>
+                        </label>
+                    </div>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </article>
+        </body>
+    {% else %}
+    <h2 style="margin-bottom: 0px;">Unauthorized access</h2>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

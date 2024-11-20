@@ -1,0 +1,51 @@
+{% extends 'template.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
+        <title>Admin</title>
+        <body>
+            <article>
+                {% for message in messages %}
+                <small style="color: darkblue;">{{message}}</small>
+                {% endfor %}
+                <nav style="border-bottom: 4px solid #43a047;margin-bottom: 1%;">
+                    <h2 style="margin-bottom: 0px;">Admin</h2>
+                    <ul>
+                        <li><a href="{% url 'add_doctor' %}" role="button">Add Doctors</a></li><br>
+                        <li><a href="{% url 'add_staff' %}" role="button">Add Staff</a></li><br>
+                    </ul>
+                </nav>
+                <section>
+                    <div class="grid">
+                        <div style="background-color: #43a047;color: white;border-radius: 15px;text-align: center;font-size: larger;margin-bottom: 5px;">
+                            <a href="{% url 'view_appointment' %}" style="color: white;">Appointments</a>
+                            <br>
+                            <h1 style="color: white;">{{ appointments }}</h1>
+                        </div>
+                        <div style="background-color: #43a047;color: white;border-radius: 15px;text-align: center;font-size: larger;margin-bottom: 5px;">
+                            <a href="{% url 'view_patient' %}" style="color: white;">Patients</a>
+                            <br>
+                            <h1 style="color: white;">{{ patients }}</h1>
+                        </div>
+                        <div style="background-color: #43a047;color: white;border-radius: 15px;text-align: center;font-size: larger;margin-bottom: 5px;">
+                            <a href="{% url 'view_doctor' %}" style="color: white;">Doctors</a>
+                            <br>
+                            <h1 style="color: white;">{{ doctors }}</h1>
+                        </div>
+                        <div style="background-color: #43a047;color: white;border-radius: 15px;text-align: center;font-size: larger;margin-bottom: 5px;">
+                            <a href="{% url 'view_staff' %}" style="color: white;">Staff</a>
+                            <br>
+                            <h1 style="color: white;">{{ staff }}</h1>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </body>
+    {% else %}
+    <title>Access Denied</title>
+    <body>
+        <h1>You are not allowed to view this page</h1>
+    </body>
+    {% endif %}
+{% endif %}
+{% endblock %}

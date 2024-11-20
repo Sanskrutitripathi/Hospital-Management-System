@@ -1,0 +1,20 @@
+{% extends 'template.html' %}
+{% block content %}
+<article>
+    {% for message in messages %}
+    <small style="color: darkblue;">{{message}}</small>
+    {% endfor %}
+    <nav style="border-bottom: 4px solid #43a047;margin-bottom: 1%;">
+        <h2 style="margin-bottom: 0px;">Doctors</h2>
+        
+    </nav>
+    <article>
+        <table>
+            <tr><td style="font-size: x-large;">Doctor Name</td><td style="font-size: x-large;">Field</td><td style="font-size: x-large;">Experience</td></tr>
+            {% for doctor in doctor_list %}
+            <tr><td>{{doctor.fname}} {{doctor.lname}}</td><td>{{doctor.speciality}}</td><td>{{doctor.experience}}</td></tr>
+            {% endfor %}
+        </table>
+    </article>
+</article>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'template.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<title>Please Logout</title>
+<h3>Please logout to continue...</h3>
+{% else %}
+<head>
+    <title>Signup</title>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h2 style="margin-bottom: 0px;">Signup</h2>
+        <hr style="border: 2px solid #43a047;">
+        <form method="post" action="">
+            {% csrf_token %}
+            
+            <label for="fname">Username{{form.username}}</label>
+            <div class="grid">
+                <label for="fname">First Name {{form.first_name}} </label>
+                <label for="lname">Last Name {{form.last_name}} </label>
+            </div>
+            <br>
+            <div class="grid">
+                <label for="email">Email ID {{form.email}} </label>
+                <label for="password1">Create Password {{form.password1}} </label>
+                <label for="password2">Confirm Password {{form.password2}} </label>
+            </div>
+            <!-- 
+                Your password can’t be too similar to your other personal information.
+                Your password must contain at least 8 characters.
+                Your password can’t be a commonly used password.
+                Your password can’t be entirely numeric.
+             -->
+            <br>
+            <details role="list">
+                <summary aria-haspopup="listbox">Password Rules</summary>
+                <ul role="listbox">
+                  <li><a>Contain atleast 8 characters</a></li>
+                  <li><a>Can't have only numbers</a></li>
+                  <li><a>Can't be similar to personal information</a></li>
+                  <li><a>Can't be a common password</a></li>
+                </ul>
+            </details>
+            <input type="submit" value="Submit">
+            <small style="color: red;">{{form.errors}}</small>
+        </form>
+        <small>Already have an account ? <a href="{% url 'login' %}">Login here</a><br></small>
+        <a href="{% url 'forgot' %}"><small>Forgot password ?</small></a>
+    </article>
+</body>
+{% endif %}
+
+{% endblock %}

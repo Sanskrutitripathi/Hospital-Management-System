@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+<title>Home</title>
+<body>
+    {% for message in messages %}
+    <small style="color: darkblue;">{{message}}</small>
+    {% endfor %}
+    <main class="container">
+        <div class="grid">
+            <div>
+                <img src="{% static 'pic1.jpg' %}" alt="">
+            </div>
+            <div>
+                <h1>Compassion</h1>
+                We demonstrate compassion by caring for and empathizing with our patients during their times of physical or emotional distress. Healthcare professionals in our hospital work tirelessly to alleviate suffering and provide comfort and support to individuals and their families.
+            </div>
+        </div>
+        <br><br><br><br><br>
+        <div class="grid">
+            <div>
+                <h1>Expertise</h1>
+                We strive for excellence by cultivating a culture of expertise. Our doctors are skilled and knowledgeable healthcare professionals who possess the necessary training and experience to deliver high-quality care and make informed medical decisions.
+                <br><br>
+                We ensure equitable access to healthcare services by working to eliminate barriers, provide care regardless of a person's background or socioeconomic status, and prioritize the well-being of all individuals within our communities.
+            </div>
+            <div>
+                <img src="{% static 'pic2.jpg' %}" alt="">
+            </div>
+        </div>
+        <br><br><br><br><br>
+        <div class="grid">
+            <div>
+                <img src="{% static 'pic3.jpg' %}" alt="">
+            </div>
+            <div>
+                <h1>Innovation</h1>
+                We embrace the virtue of innovation by continually seeking new and improved approaches to healthcare. We invest in research, technology, and medical advancements to offer cutting-edge treatments, diagnostic techniques, and interventions that can improve patient outcomes and overall healthcare delivery.
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'template.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+        <head>
+            <title>Add Doctors</title>
+            <style>
+                /* Chrome, Safari, Edge, Opera */
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+                }
+
+                /* Firefox */
+                input[type=number] {
+                -moz-appearance: textfield;
+                }
+            </style>
+        </head>
+        <body>
+            <article>
+                <h2 style="margin-bottom: 0px;">Add Doctors</h2>
+                <hr style="border: 2px solid #43a047;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="grid">
+                        <label for="fname">First Name <input type="text" name="fname" id=""></label>
+                        <label for="lname">Last Name <input type="text" name="lname" id=""></label>
+                        <label for="lname">Experience (years)<input type="number" name="exp" id="" max="25"></label>
+                    </div>
+                    <label for="spec">Speciality
+                        <select name="spec">
+                            <option value="none" disabled selected>Select</option>
+                            
+                            <option value="General">Family medicine (General)</option>
+                            <option value="General - Internal Medicine">Internal Medicine (General - Internal Medicine)</option>
+                            <option value="Child Specialist">Pediatrician (Child Specialist)</option>
+                            <option value="Women Healthcare">Obstetricians/Gynecologist (OBGYNs) (Women Healthcare)</option>
+                            <option value="Heart Specialist">Cardiologist (Heart Specialist)</option>
+                            <option value="Cancer Medicine Specialist">Oncologist (Cancer Medicine Specialist)</option>
+                            <option value="Digestion Specialist">Gastroenterologist (Digestion Specialist)</option>
+                            <option value="Respiration Specialist">Pulmonologist (Respiration Specialist)</option>
+                            <option value="Tough Infection Specialist">Infectious Disease (Tough Infection Specialist)</option>
+                            <option value="Kidney Specialist">Nephrologist (Kidney Specialist)</option>
+                            <option value="Hormone Specialist">Endocrinologist (Hormone Specialist)</option>
+                            <option value="Eye Specialist">Ophthalmologist (Eye Specialist)</option>
+                            <option value="ENT(Ear, Nose, Throat) Specialist">Otolaryngologist (ENT(Ear, Nose, Throat) Specialist)</option>
+                            <option value="Hair and Skin Specialist">Dermatologist (Hair and Skin Specialist)</option>
+                            <option value="Mental Healthcare">Psychiatrist (Mental Healthcare)</option>
+                            <option value="Brain Specialist">Neurologist (Brain Specialist)</option>
+                            <option value="General Surgeon">Surgeon (General Surgeon)</option>
+                        </select>
+                    </label>
+                    <br>
+                    <input type="submit" value="Submit">
+                    <small style="color: red;">{{form.errors}}</small>
+                </form>
+            </article>
+        </body>
+    {% endif %}
+    <h2 style="margin-bottom: 0px;">Unauthorized access</h2>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=content-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="shortcut icon" href="{% static 'logo.ico' %}" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/6d339229ba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* Green Light scheme (Default) */
+        /* Can be forced with data-theme="light" */
+        [data-theme="light"],
+        :root:not([data-theme="dark"]) {
+        --primary: #43a047;
+        --primary-hover: #388e3c;
+        --primary-focus: rgba(67, 160, 71, 0.125);
+        --primary-inverse: #FFF;
+        }
+
+        /* Green Dark scheme (Auto) */
+        /* Automatically enabled if user has Dark mode enabled */
+        @media only screen and (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+            --primary: #43a047;
+            --primary-hover: #4caf50;
+            --primary-focus: rgba(67, 160, 71, 0.25);
+            --primary-inverse: #FFF;
+        }
+        }
+
+        /* Green Dark scheme (Forced) */
+        /* Enabled if forced with data-theme="dark" */
+        [data-theme="dark"] {
+        --primary: #43a047;
+        --primary-hover: #4caf50;
+        --primary-focus: rgba(67, 160, 71, 0.25);
+        --primary-inverse: #FFF;
+        }
+
+        /* Green (Common styles) */
+        :root {
+        --form-element-active-border-color: var(--primary);
+        --form-element-focus-color: var(--primary-focus);
+        --switch-color: var(--primary-inverse);
+        --switch-checked-background-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <section style="border-bottom: 3px solid #43a047;margin-bottom: 0;">
+        <nav>
+            <a href="{% url 'home' %}">
+                <ul>
+                    <li><img src="{% static 'logo_small_ts.png' %}" alt="" width="25%"><b style="font-size: larger;">HMS</b></li>
+                </ul>
+            </a>
+            <ul>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" role="button">Logout</a></li>
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url 'office' %}">Admin</a></li>
+                    <li><a href="/backend">Backend</a></li>
+                    {% else %}
+                    <li><a href="{% url 'book' %}">Book Appointment</a></li>
+                    <li><a href="{% url 'prev_appointments' request.user.email %}">Previous Appointments</a></li>
+                    {% endif %}
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </section>
+    <section style="margin-bottom: 0px;">
+        {% if request.user.is_authenticated %}
+        <h5><i style="border-bottom: 2px solid #43a047;">{{request.user}}</i></h5>
+        {%endif%}
+    </section>
+    {% block content %}
+    {% endblock %}
+    <footer style="background-color: #43a047;">
+        <div class="grid">
+            <div style="text-align: center;">
+                <img src="{% static 'logo_small.png' %}" alt="logo">
+                <br>
+                <br>
+                <a href="#"><i class="fa-brands fa-facebook" style="font-size: xx-large;color: white;cursor: pointer;"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp" style="font-size: xx-large;color: white;cursor: pointer;"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter" style="font-size: xx-large;color: white;cursor: pointer;"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" style="font-size: xx-large;color: white;cursor: pointer;"></i></a>
+                <a href="#"><i class="fa-brands fa-snapchat" style="font-size: xx-large;color: white;cursor: pointer;"></i></a>
+            </div>
+            <div>
+                <h1 style="color:white;margin-bottom: 5%;margin-top: 5%;">About Us</h1>
+                <p style="color:white;">
+                    Welcome to our hospital management system! We are a dedicated team of professionals committed to streamlining hospital operations and improving patient care. Our system offers user-friendly features for managing patient records, appointments, billing, and more. We prioritize data security and provide personalized support to ensure a seamless experience. Join us in revolutionizing hospital management and enhancing healthcare efficiency.
+                </p>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="grid">
+                <div style="margin-left: 10%;">
+                    <h5 style="color:white;">Useful Links</h5>
+                    <ul>
+                        
+                            {% if user.is_superuser %}
+                                <a style="color: white;" href="{% url 'office' %}"><li>Home</li></a>
+                                <a style="color: white;" href="{% url 'view_appointment' %}"><li>View Appointments</li></a>
+                                <a style="color: white;" href="{% url 'view_patient' %}"><li>View Patients</li></a>
+                                <a style="color: white;" href="{% url 'view_staff' %}"><li>View Staff</li></a>
+                                <a style="color: white;" href="{% url 'logout' %}"><li>Logout</li></a>
+                            {% else %}
+                                <a style="color: white;" href="{% url 'book' %}"><li>Book Appointment</li></a>
+                                <a style="color: white;" href="{% url 'prev_appointments' request.user.email %}"><li>Previous Appointments</li></a>
+                                <a style="color: white;" href="{% url 'logout' %}"><li>Logout</li></a>
+                            {% endif %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <p style="text-align: center;">Copyright &copy 2020 Medical Healthcare Soultion. All Rights Reserved.<p>
+    </footer>
+</body>
+</html>

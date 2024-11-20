@@ -1,0 +1,41 @@
+{% extends 'template.html' %}
+{% block content %}
+<title>{{pat.name}}</title>
+<article>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="grid">
+            <div>
+                <label>Patient Name<input type="text" name="name" id="" value="{{pat.name}}" readonly></label>
+            </div>
+            <div>
+                <label>Email ID<input type="text" name="email" id="" value="{{pat.email}}" readonly></label>
+            </div>
+            <div>
+                <label>Mobile no.<input type="number" name="mobile" id="" value="{{pat.mobile}}" readonly></label>
+            </div>
+        </div>
+        <div class="grid">
+            <div>
+                <label for="">Age<input type="number" name="age" id="" value="{{pat.age}}" readonly></label>
+            </div>
+            <div>
+                <label for="">Gender<input type="text" name="gender" id="" value="{{pat.gender}}" readonly></label>
+            </div>
+        </div>
+        <div class="grid">
+            <div>
+                <label for="">Doctor<input type="text" name="doc_name" id="" value="{{doc_name}}" readonly></label>
+            </div>
+            <div>
+                <label for="">Specialist</label><input type="text" name="doc_name" id="" value="{{doc_spec}}" readonly></label>
+            </div>
+            <div class="grid">
+                <div>
+                    <label style="color: transparent;">.<input style="background-color: transparent;color: #43a047;border: 3px solid;font-weight: bold;" type="submit" value="Discharge" aria-invalid="false" name="decide" role="radio"></label>
+                </div>
+            </div>
+        </div>
+    </form>
+</article>
+{% endblock %}

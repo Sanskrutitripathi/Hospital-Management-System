@@ -1,0 +1,19 @@
+{% extends 'template.html' %}
+{% block content %}
+<article>
+    {% for message in messages %}
+    <small style="color: darkblue;">{{message}}</small>
+    {% endfor %}
+    <nav style="border-bottom: 4px solid #43a047;margin-bottom: 1%;">
+        <h2 style="margin-bottom: 0px;">Staff</h2>
+    </nav>
+    <article>
+        <table>
+            <tr><td style="font-size: x-large;">Name</td><td style="font-size: x-large;">Age</td><td style="font-size: x-large;">Mobile no.</td><td style="font-size: x-large;">Role</td></tr>
+            {% for person in staff %}
+            <tr><td>{{person.name}}</td><td>{{person.age}}</td><td>{{person.mobile}}</td><td>{{person.role}}</td><td><a href="{% url 'remove_staff' person.sid %}" role="button">Fire</a></td></tr>
+            {% endfor %}
+        </table>
+    </article>
+</article>
+{% endblock %}
